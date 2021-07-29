@@ -1,10 +1,14 @@
 name: style-transfer
 channels:
+  - pytorch
+  - defaults
   - conda-forge
 dependencies:
   - python=3.9
   - numpy=1.20
   - pytorch=1.9
+  - torchvision=0.10
+  - pillow=8.3
   - ipykernel=6.0
   - jupytext=1.11
   - yapf=0.31
