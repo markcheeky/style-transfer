@@ -17,3 +17,22 @@ None. NST only uses one source image for content and one for style. It still nee
 We initialize the CNN's input with the original content image and minimize the NST loss with gradient descent. However, we modify the **network input, not the weights!** After enough optimization steps, the input of the network becomes a stylized image.
 
 The NST loss consists of two components: content loss and style loss. The content loss makes sure we stay close to the original content, while the style loss ensures a style match. For a detailed explanation, see the book or the paper referenced above.
+
+
+## Project structure
+
+The code is written in Python 3.9, and the required dependencies are listed in [conda's environment](environment.yml) file.
+
+All code is in the *src* folder:
+- [src/preprocess.py](src/preprocess.py) - helper functions for processing data
+- [src/scores.py](src/scores.py) - implementation of NST loss as a pytorch layer
+- [src/model.py](src/model.py) - the actual implementation of NST
+- [src/example.py](src/example.py) - an example code
+
+The example is meant to be run inside Jupyter for interactive explorations of the stylized images. Use [Jupytext plugin](https://jupytext.readthedocs.io/) for Jupyter to run *.py* files as notebooks.
+
+
+## Limitations
+
+- The model requires the style and content image to be the same size. Use cropping and resizing.
+- Transparency is not unsupported
