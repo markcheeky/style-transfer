@@ -1,6 +1,6 @@
 import copy
+from typing import Iterator
 
-import numpy as np
 import torch
 
 from scores import ContentScore, StyleScore
@@ -45,7 +45,7 @@ class StyleTransfer:
                  style: torch.Tensor,
                  content_layers: set[int],
                  style_layers: set[int],
-                 style_weight=1e6):
+                 style_weight=1e6) -> Iterator[torch.Tensor]:
 
         x = content.clone()
         model = self.inject_scoring(base, content, style, content_layers, style_layers)
@@ -63,5 +63,5 @@ class StyleTransfer:
             loss.backward()
             optimizer.step()
             with torch.no_grad():
-                x.clamp_(0, 1)
+                x.clip_(0, 1)
             yield x
